@@ -1,8 +1,11 @@
 import discord
 from discord.ext import commands
-from discord.utils import get
+import os
+from dotenv import load_dotenv
 
-TOKEN = 'OTU0OTcyMjgxODQ5OTI5NzU4.Yja5Pg.jZhZtN0avrZD1zhIhkKnSGXycgE'
+load_dotenv()
+
+TOKEN = os.getenv('token')
 
 client = commands.Bot(command_prefix = ">")
 
