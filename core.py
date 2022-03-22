@@ -100,12 +100,16 @@ async def tictactoe(message, challenge):
 
     current_players.append(uname)
     current_players.append(cname)
+    print(current_players)
 
     if len(current_players)>2 and (uname != current_players[0] or cname != current_players[1]):
         await message.send(f"Sorry {uname} wait for the current game to end.")
     else:
         username = current_players[0]
         challenger = current_players[1]
+
+        if username.__contains__("!"):
+            username = username.replace("!","")
 
         if challenger.__contains__("!"):
             challenger = challenger.replace("!","")
@@ -121,6 +125,8 @@ async def move(message, pos):
     global turn, turn_player
     global count_step
     player_ = message.author.mention
+    if player_.__contains__("!"):
+        player_ = player_.replace("!","")
     if turn == "":
         turn = username
     else:
