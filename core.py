@@ -100,7 +100,6 @@ async def tictactoe(message, challenge):
 
     current_players.append(uname)
     current_players.append(cname)
-    print(current_players)
 
     if len(current_players)>2 and (uname != current_players[0] or cname != current_players[1]):
         await message.send(f"Sorry {uname} wait for the current game to end.")
@@ -133,50 +132,59 @@ async def move(message, pos):
         if turn_player.__contains__("!"):
             turn_player = turn_player.replace("!","")
         turn = turn_player
+        print(turn_player)
 
     if turn == player_ == username:
         turn_player = str(player_response(pos, username, role="X"))
-        board = discord.Embed(
-            description = display(path_num)
-        )
-        await message.send(embed = board)
-        count_step = count_step + 1
-        game = check_win(path_num)
-        if game: 
-            if count_step >= 9:
-                print(count_step)
-                board = discord.Embed(
-                    description = "This game ended draw write >tictactoe to start new game"
-                )
-                await message.send(embed = board)
-                clear_board()
+        if turn_player == "Invalid":
+            turn_player = username
+            await message.send("Invalid move try again")
+        else:    
+            board = discord.Embed(
+                description = display(path_num)
+            )
+            await message.send(embed = board)
+            count_step = count_step + 1
+            game = check_win(path_num)
+            if game: 
+                if count_step >= 9:
+                    print(count_step)
+                    board = discord.Embed(
+                        description = "This game ended draw write >tictactoe to start new game"
+                    )
+                    await message.send(embed = board)
+                    clear_board()
+                else:
+                    pass
             else:
-                pass
-        else:
-            await message.send(f"{username} wins.")
-            clear_board()
+                await message.send(f"{username} wins.")
+                clear_board()
 
     
     elif turn == player_ == challenger:
         turn_player = str(player_response(pos, challenger ,role="O"))
-        board = discord.Embed(
-            description = display(path_num)
-        )
-        await message.send(embed = board)
-        count_step = count_step + 1
-        game = check_win(path_num)
-        if game: 
-            if count_step >= 9:
-                board = discord.Embed(
-                    description = "This game ended draw write >tictactoe @friendname to start new game"
-                )
-                await message.send(embed = board)
-                clear_board()
+        if turn_player == "Invalid":
+            await message.send("Invalid move try again")
+            turn_player = challenger
+        else:    
+            board = discord.Embed(
+                description = display(path_num)
+            )
+            await message.send(embed = board)
+            count_step = count_step + 1
+            game = check_win(path_num)
+            if game: 
+                if count_step >= 9:
+                    board = discord.Embed(
+                        description = "This game ended draw write >tictactoe @friendname to start new game"
+                    )
+                    await message.send(embed = board)
+                    clear_board()
+                else:
+                    pass
             else:
-                pass
-        else:
-            await message.send(f"{challenger} wins.")
-            clear_board()
+                await message.send(f"{challenger} wins.")
+                clear_board()
 
     else:
         await message.send("It's not your turn")
@@ -193,4 +201,5 @@ async def quit(message):
         await message.send("Bye!")
     else:
         await message.send("Maintain patience")
+
 client.run(TOKEN)
