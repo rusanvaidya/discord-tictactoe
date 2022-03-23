@@ -85,7 +85,7 @@ def check_win(path_num):
 async def on_ready():
     print(f"{client.user} is online")
 
-@client.command(brief='Start the game Tic-Tac-Toe using >tictactoe @<Mention Friend>')
+@client.command(brief='Start the game Tic-Tac-Toe using >tictactoe @<Mention Friend>' , aliases=['ttt'])
 async def tictactoe(message, challenge):
     global turn, turn_player
     turn = ""
@@ -119,7 +119,7 @@ async def tictactoe(message, challenge):
         )
         await message.send(embed = board)
 
-@client.command(brief = "move <position>")
+@client.command(brief = "move <position>", aliases=['m'])
 async def move(message, pos):
     global turn, turn_player
     global count_step
@@ -201,5 +201,5 @@ async def quit(message):
         await message.send("Bye!")
     else:
         await message.send("Maintain patience")
-
+        
 client.run(TOKEN)
