@@ -201,6 +201,9 @@ async def quit(message):
     global challenger
 
     clear_user_name = message.author.mention
+    
+    if clear_user_name.__contains__("!"):
+        clear_user_name = clear_user_name.replace("!","")
 
     if clear_user_name == username or clear_user_name == challenger:
         clear_board()
