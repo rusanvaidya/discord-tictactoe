@@ -112,12 +112,17 @@ async def tictactoe(message, challenge):
 
         if challenger.__contains__("!"):
             challenger = challenger.replace("!","")
-        await message.send(f"{username} challenged {str(challenger)} to a game of Tic-Tac-Toe")
-        path_num = [['1','2','3'], ['4','5','6'], ['7','8','9']]
-        board = discord.Embed(
-            description = display(path_num)
-        )
-        await message.send(embed = board)
+
+        if username != challenger:
+            await message.send(f"{username} challenged {str(challenger)} to a game of Tic-Tac-Toe")
+            path_num = [['1','2','3'], ['4','5','6'], ['7','8','9']]
+            board = discord.Embed(
+                description = display(path_num)
+            )
+            await message.send(embed = board)
+        else:
+            await message.send(f"{username} is your id, please mention your friend if you want to challenge.")
+
 
 @client.command(brief = "move <position>", aliases=['m'])
 async def move(message, pos):
