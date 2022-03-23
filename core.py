@@ -122,6 +122,7 @@ async def tictactoe(message, challenge):
             await message.send(embed = board)
         else:
             await message.send(f"{username} is your id, please mention your friend if you want to challenge.")
+            clear_board()
 
 
 @client.command(brief = "move <position>", aliases=['m'])
